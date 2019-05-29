@@ -64,12 +64,12 @@ const existsExecutableChrome = () => {
 const setupLocalChrome = () => {
   return new Promise((resolve, reject) => {
     fs.createReadStream(config.localChromePath)
-    .on('error', (err) => reject(err))
-    .pipe(tar.x({
-      C: config.setupChromePath,
-    }))
-    .on('error', (err) => reject(err))
-    .on('end', () => resolve());
+      .on('error', (err) => reject(err))
+      .pipe(tar.x({
+        C: config.setupChromePath,
+      }))
+      .on('error', (err) => reject(err))
+      .on('end', () => resolve());
   });
 };
 
@@ -80,13 +80,13 @@ const setupS3Chrome = () => {
       Key: config.remoteChromeS3Key,
     };
     s3.getObject(params)
-    .createReadStream()
-    .on('error', (err) => reject(err))
-    .pipe(tar.x({
-      C: config.setupChromePath,
-    }))
-    .on('error', (err) => reject(err))
-    .on('end', () => resolve());
+      .createReadStream()
+      .on('error', (err) => reject(err))
+      .pipe(tar.x({
+        C: config.setupChromePath,
+      }))
+      .on('error', (err) => reject(err))
+      .on('end', () => resolve());
   });
 };
 
